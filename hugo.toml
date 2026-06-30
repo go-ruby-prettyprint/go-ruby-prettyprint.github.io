@@ -1,0 +1,31 @@
+baseURL = "https://go-ruby-prettyprint.github.io/"
+title = "go-ruby-prettyprint"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[[params.phases]]
+  name = "Groups & width-fitting"
+  status = "ready"
+  blurb = "Groups print flat when they fit and break at their breakables when they overflow `maxwidth` — the exact `break_outmost_groups` / depth-bucketed `GroupQueue` algorithm MRI uses, so nested groups break outermost-first."
+[[params.phases]]
+  name = "Breakables"
+  status = "ready"
+  blurb = "`breakable(sep, width)` line-break hints that emit their separator when the line is not broken, with the `width` argument for multibyte or proportional separators."
+[[params.phases]]
+  name = "Nesting & indentation"
+  status = "ready"
+  blurb = "`nest(indent)` and the `group(indent, …)` indent argument, with a pluggable `genspace` block for the indentation string (default `DefaultGenSpace` — `n` ASCII spaces)."
+[[params.phases]]
+  name = "Open/close text & fill mode"
+  status = "ready"
+  blurb = "`group(indent, open, close)` wrapping the block in bracketing text counted toward the fit decision, and `fill_breakable`, where each break is decided individually."
+[[params.phases]]
+  name = "Single-line formatter"
+  status = "ready"
+  blurb = "`singleline_format`, where breakables become their separator text and nothing ever breaks — plus custom `newline` and custom `maxwidth`, matching MRI's `PrettyPrint.new` / `PrettyPrint.format` signatures."
+[[params.phases]]
+  name = "Differential oracle & coverage"
+  status = "ready"
+  blurb = "A shared corpus run through both this package and a generated `PrettyPrint.format` / `singleline_format` script, output asserted identical; deterministic ruby-free golden + white-box tests alone hold 100% coverage, gofmt + go vet clean, green across all six 64-bit Go arches and three OSes."
